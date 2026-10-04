@@ -14,20 +14,26 @@
     <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- Tailwind Custom Configuration -->
+    <!-- Tailwind Custom Configuration (Combining elegant theme) -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
+                        champagne: '#FDFBF7',
+                        rosegold: {
+                            100: '#F7E7E3',
+                            300: '#E8C5BE',
+                            500: '#C88A80',
+                            600: '#B5756B',
+                            700: '#94584E'
+                        },
+                        charcoal: '#2C2A29',
+                        warmgray: '#8C8583',
                         brand: {
-                            light: '#FAFAFA',
-                            cream: '#FDFBF7',
-                            dark: '#1C1C1C',
-                            gray: '#6B6B6B',
-                            accent: '#e91e63' /* Derived from your vibrant logo */
+                            accent: '#e91e63' /* Accent from original logo info if needed */
                         }
                     },
                     fontFamily: {
@@ -42,8 +48,8 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FAFAFA;
-            color: #1C1C1C;
+            background-color: #FDFBF7;
+            color: #2C2A29;
             overflow-x: hidden;
         }
         
@@ -51,77 +57,94 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Elegant Navigation */
+        /* Glassmorphism Navigation */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background: rgba(253, 251, 247, 0.90);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(247, 231, 227, 0.5);
         }
 
-        /* Image hover effects */
+        /* Smooth image zoom effect */
         .zoom-img {
             transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .zoom-card:hover .zoom-img {
-            transform: scale(1.05);
+            transform: scale(1.06);
+        }
+
+        /* Soft gradient overlay */
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(44, 42, 41, 0.45) 0%, rgba(44, 42, 41, 0.7) 100%);
         }
 
         /* Loading Animation */
         #loader {
             transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
         }
-        
+
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #FAFAFA; }
-        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E8C5BE;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C88A80;
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-brand-accent selection:text-white">
+<body class="antialiased selection:bg-rosegold-300 selection:text-charcoal">
 
     <!-- PAGE LOADER WITH LOGO -->
-    <div id="loader" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center">
+    <div id="loader" class="fixed inset-0 z-[100] bg-champagne flex flex-col items-center justify-center">
         <img src="aj logo.png" alt="Loading..." class="h-24 w-auto animate-pulse mb-6 object-contain">
-        <div class="h-0.5 w-24 bg-gray-200 overflow-hidden rounded">
-            <div class="h-full bg-brand-dark w-1/2 animate-[ping_1.5s_ease-in-out_infinite]"></div>
+        <div class="h-0.5 w-24 bg-rosegold-100 overflow-hidden rounded">
+            <div class="h-full bg-rosegold-500 w-1/2 animate-[ping_1.5s_ease-in-out_infinite]"></div>
         </div>
     </div>
 
     <!-- NAVIGATION BAR -->
     <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="mainHeader">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 md:h-24 flex items-center justify-between">
             <!-- Brand Logo -->
-            <a href="#home" class="flex items-center group">
-                <img src="aj logo.png" alt="AJ Events Logo" class="h-14 w-auto object-contain transition-transform duration-500 group-hover:scale-105">
-                <span class="ml-3 font-serif-title text-2xl tracking-widest text-brand-dark hidden sm:block">AJ EVENTS</span>
+            <a href="#home" class="flex items-center space-x-3 group">
+                <img src="aj logo.png" alt="AJ Events Logo" class="h-12 md:h-14 w-auto object-contain transition-transform duration-500 group-hover:scale-105">
+                <span class="font-serif-title text-xl md:text-2xl font-bold tracking-widest text-charcoal group-hover:text-rosegold-600 transition-colors hidden sm:block">
+                    AJ <span class="font-light italic text-rosegold-500">Events</span>
+                </span>
             </a>
 
             <!-- Desktop Menu -->
-            <nav class="hidden md:flex items-center space-x-10">
-                <a href="#home" class="text-sm tracking-wide text-brand-dark hover:text-brand-accent transition-colors">HOME</a>
-                <a href="#about" class="text-sm tracking-wide text-brand-dark hover:text-brand-accent transition-colors">ABOUT US</a>
-                <a href="#services" class="text-sm tracking-wide text-brand-dark hover:text-brand-accent transition-colors">SERVICES</a>
-                <a href="#portfolio" class="text-sm tracking-wide text-brand-dark hover:text-brand-accent transition-colors">PORTFOLIO</a>
-                <a href="#contact" class="px-6 py-2.5 border border-brand-dark text-brand-dark text-sm tracking-widest hover:bg-brand-dark hover:text-white transition-all duration-300">
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-sm font-medium tracking-wide text-charcoal hover:text-rosegold-600 transition-colors">HOME</a>
+                <a href="#about" class="text-sm font-medium tracking-wide text-charcoal hover:text-rosegold-600 transition-colors">ABOUT US</a>
+                <a href="#services" class="text-sm font-medium tracking-wide text-charcoal hover:text-rosegold-600 transition-colors">SERVICES</a>
+                <a href="#portfolio" class="text-sm font-medium tracking-wide text-charcoal hover:text-rosegold-600 transition-colors">PORTFOLIO</a>
+                <a href="#contact" class="px-6 py-2.5 rounded-full border border-rosegold-500 text-rosegold-600 text-sm font-medium tracking-widest hover:bg-rosegold-500 hover:text-white transition-all shadow-sm">
                     INQUIRE
                 </a>
             </nav>
 
             <!-- Mobile Menu Toggle Button -->
-            <button id="menuToggle" class="md:hidden text-brand-dark focus:outline-none p-2" aria-label="Toggle Menu">
+            <button id="menuToggle" class="md:hidden text-charcoal focus:outline-none p-2" aria-label="Toggle Menu">
                 <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
             </button>
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-100 px-6 py-8 transition-all duration-300 shadow-xl">
+        <div id="mobileMenu" class="hidden md:hidden bg-champagne border-b border-rosegold-100 px-6 py-8 transition-all duration-300 shadow-xl">
             <nav class="flex flex-col space-y-6 text-center">
-                <a href="#home" class="mobile-nav-link text-sm tracking-widest text-brand-dark hover:text-brand-accent">HOME</a>
-                <a href="#about" class="mobile-nav-link text-sm tracking-widest text-brand-dark hover:text-brand-accent">ABOUT US</a>
-                <a href="#services" class="mobile-nav-link text-sm tracking-widest text-brand-dark hover:text-brand-accent">SERVICES</a>
-                <a href="#portfolio" class="mobile-nav-link text-sm tracking-widest text-brand-dark hover:text-brand-accent">PORTFOLIO</a>
-                <a href="#contact" class="mobile-nav-link inline-block px-6 py-3 border border-brand-dark text-brand-dark text-sm tracking-widest hover:bg-brand-dark hover:text-white transition-all">
+                <a href="#home" class="mobile-nav-link text-sm font-medium tracking-widest text-charcoal hover:text-rosegold-600">HOME</a>
+                <a href="#about" class="mobile-nav-link text-sm font-medium tracking-widest text-charcoal hover:text-rosegold-600">ABOUT US</a>
+                <a href="#services" class="mobile-nav-link text-sm font-medium tracking-widest text-charcoal hover:text-rosegold-600">SERVICES</a>
+                <a href="#portfolio" class="mobile-nav-link text-sm font-medium tracking-widest text-charcoal hover:text-rosegold-600">PORTFOLIO</a>
+                <a href="#contact" class="mobile-nav-link inline-block px-6 py-3 rounded-full bg-rosegold-500 text-white font-medium tracking-widest hover:bg-rosegold-600 transition-all mt-2">
                     INQUIRE
                 </a>
             </nav>
@@ -129,242 +152,446 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Banner Image -->
         <div class="absolute inset-0 z-0">
-            <!-- Background Banner Image -->
             <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80" 
-                 alt="Elegant Wedding Decor" 
+                 alt="Luxury Wedding Setup" 
                  class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="absolute inset-0 hero-overlay"></div>
         </div>
 
-        <div class="relative z-10 text-center text-white px-4">
-            <h1 class="font-serif-title text-5xl md:text-7xl lg:text-8xl font-normal tracking-wide mb-6">
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-20">
+            <p class="text-rosegold-300 font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4">
+                Your Dream, Our Design
+            </p>
+            <h1 class="font-serif-title text-5xl sm:text-7xl md:text-8xl font-normal leading-tight tracking-wide mb-6">
                 AJ EVENTS
             </h1>
-            <p class="text-sm md:text-lg tracking-[0.3em] font-light uppercase mb-10">
-                Your Dream, Our Design.
+            <p class="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-light mb-10 leading-relaxed">
+                From intimate gatherings to grand celebrations, we bring your dream events to life with flawless elegance and timeless style in Ramakkalmettu.
             </p>
-            <a href="#contact" class="inline-block px-10 py-4 bg-white/10 backdrop-blur-md border border-white/50 text-white text-sm tracking-widest hover:bg-white hover:text-brand-dark transition-all duration-500">
-                PLAN YOUR EVENT
-            </a>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full bg-rosegold-500 text-white tracking-widest text-sm font-medium hover:bg-rosegold-600 transition-all transform hover:-translate-y-0.5 shadow-lg">
+                    PLAN YOUR EVENT
+                </a>
+                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-full border border-white/60 text-white tracking-widest text-sm font-medium hover:bg-white/10 transition-all backdrop-blur-sm">
+                    EXPLORE GALLERY
+                </a>
+            </div>
         </div>
+
+        <!-- Scroll Down Indicator -->
+        <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 text-white/70 hover:text-white transition-colors animate-bounce hidden sm:block">
+            <i class="fa-solid fa-chevron-down text-lg"></i>
+        </a>
     </section>
 
-    <!-- ABOUT US SECTION -->
-    <section id="about" class="py-24 md:py-32 bg-brand-light">
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 md:py-32 bg-champagne">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Grid -->
+                <div class="relative order-2 lg:order-1">
+                    <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative z-10">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" 
+                             alt="Wedding Event" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <!-- Secondary Accent Image -->
+                    <div class="hidden sm:block absolute -bottom-8 -left-8 w-2/3 aspect-square rounded-2xl overflow-hidden shadow-2xl border-8 border-champagne z-20">
+                        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80" 
+                             alt="Event Detail" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -top-6 -right-6 w-32 h-32 border-2 border-rosegold-300 rounded-2xl -z-0"></div>
+                </div>
+
                 <!-- Text Content -->
-                <div class="order-2 lg:order-1">
-                    <span class="text-brand-gray tracking-widest text-xs uppercase mb-4 block">Discover Our Passion</span>
-                    <h2 class="font-serif-title text-4xl md:text-5xl text-brand-dark mb-8 leading-tight">
+                <div class="order-1 lg:order-2 lg:pl-8">
+                    <span class="text-rosegold-600 font-semibold uppercase tracking-[0.2em] text-xs">Discover Our Passion</span>
+                    <h2 class="font-serif-title text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-8 leading-tight">
                         We believe every occasion deserves to be celebrated in style.
                     </h2>
-                    <div class="text-brand-gray font-light leading-relaxed space-y-6 text-sm md:text-base">
+                    <div class="text-warmgray font-light leading-relaxed space-y-6 text-sm md:text-base">
                         <p>
                             We are a passionate team of event creators dedicated to turning your special moments into unforgettable memories. From weddings and engagements to corporate events and private celebrations, our goal is to design experiences that truly reflect your vision.
                         </p>
                         <p>
                             With creativity, precision, and attention to detail, we take care of everything—from planning and décor to execution—so you can enjoy every moment stress-free. Whether it's an intimate gathering or a grand celebration, we bring elegance, innovation, and professionalism to every event.
                         </p>
-                        <p class="font-medium text-brand-dark">
+                        <p class="font-medium text-charcoal">
                             At AJ EVENTS, we don't just plan events—we create experiences that last a lifetime.
                         </p>
                     </div>
-                    <img src="aj logo.png" alt="AJ Events Butterfly Logo" class="h-16 w-auto object-contain mt-10 opacity-80">
-                </div>
-                
-                <!-- Image -->
-                <div class="order-1 lg:order-2">
-                    <div class="aspect-[3/4] overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" alt="Wedding Couple" class="w-full h-full object-cover">
-                    </div>
+                    
+                    <img src="aj logo.png" alt="AJ Events Logo" class="h-16 w-auto object-contain mt-10 opacity-80">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SERVICES SECTION -->
-    <section id="services" class="py-24 md:py-32 bg-brand-cream border-y border-gray-200">
+    <section id="services" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="text-brand-gray tracking-widest text-xs uppercase mb-4 block">What We Offer</span>
-                <h2 class="font-serif-title text-4xl md:text-5xl text-brand-dark">Contact Us For</h2>
-                <div class="w-16 h-px bg-brand-dark mx-auto mt-8"></div>
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-rosegold-600 font-semibold uppercase tracking-wider text-xs">What We Offer</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-4">
+                    Our Curated Services
+                </h2>
+                <div class="w-16 h-px bg-rosegold-500 mx-auto mt-6 mb-6"></div>
+                <p class="text-warmgray font-light">
+                    From the initial concept to the final execution, we offer comprehensive services tailored to your specific event requirements.
+                </p>
             </div>
 
-            <!-- Services Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-8">
-                <!-- Service Items -->
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Wedding Contracts</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Destination Wedding</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Catering</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Illumination Works</span></div>
+            <!-- Services Cards Grid mapping the extensive list -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Stage Decorations</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Pantal</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">DJ with Sound</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Fusion Live</span></div>
-                
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Nadaswaram</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Videography</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Photography</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Car Bokeh</span></div>
-                
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Baptisam</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Naming ceremony</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Maduramveppu</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Haldi Mehendi</span></div>
-                
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Birthday Function</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">Anniversary Functions</span></div>
-                <div class="flex items-center space-x-3 md:col-span-1 lg:col-span-2"><i class="fa-solid fa-check text-brand-gray/50"></i><span class="text-brand-dark font-light">House Warming</span></div>
+                <!-- Service 1: Planning & Weddings -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-ring"></i>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-4">Wedding Planning</h3>
+                    <ul class="space-y-3 text-sm text-warmgray font-light flex-grow">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Wedding Contracts</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Destination Weddings</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2: Decor & Setup -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-4">Decor & Setup</h3>
+                    <ul class="space-y-3 text-sm text-warmgray font-light flex-grow">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Stage Decorations</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Illumination Works</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Pantal Setup</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Car Bokeh</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3: Entertainment -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-4">Entertainment</h3>
+                    <ul class="space-y-3 text-sm text-warmgray font-light flex-grow">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> DJ with Sound</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Fusion Live</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Nadaswaram</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4: Media -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-4">Photography & Media</h3>
+                    <ul class="space-y-3 text-sm text-warmgray font-light flex-grow">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Professional Photography</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Videography & Highlight Reels</li>
+                    </ul>
+                </div>
+
+                <!-- Service 5: Events -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-cake-candles"></i>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-4">Special Occasions</h3>
+                    <ul class="space-y-3 text-sm text-warmgray font-light flex-grow">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Baptism & Naming Ceremony</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Maduramveppu & Haldi/Mehendi</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Birthday & Anniversary Functions</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> House Warming</li>
+                    </ul>
+                </div>
+
+                <!-- Service 6: Catering -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-4">Catering</h3>
+                    <ul class="space-y-3 text-sm text-warmgray font-light flex-grow">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Premium Catering Services</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-rosegold-400 mr-3 text-xs"></i> Custom Menu Planning</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </section>
 
     <!-- PORTFOLIO / GALLERY SECTION -->
-    <section id="portfolio" class="py-24 md:py-32 bg-brand-light">
+    <section id="portfolio" class="py-24 bg-champagne">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-serif-title text-4xl md:text-5xl text-brand-dark">A Glimpse of Our Work</h2>
-                <div class="w-16 h-px bg-brand-dark mx-auto mt-8"></div>
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-rosegold-600 font-semibold uppercase tracking-wider text-xs">Our Work</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-4">
+                    A Glimpse of Our Work
+                </h2>
+                <div class="w-16 h-px bg-rosegold-500 mx-auto mt-6 mb-6"></div>
             </div>
 
-           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-    <div class="zoom-card overflow-hidden aspect-square cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80" alt="Decor" class="zoom-img w-full h-full object-cover">
-    </div>
-    <div class="zoom-card overflow-hidden aspect-square cursor-pointer">
-        <!-- Fixed typo: changed stageew.jpg to stagew.jpg -->
-        <img src="stagew.jpg" alt="Venue" class="zoom-img w-full h-full object-cover">
-    </div>
-    <div class="zoom-card overflow-hidden aspect-square cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80" alt="Details" class="zoom-img w-full h-full object-cover">
-    </div>
-    <div class="zoom-card overflow-hidden aspect-square cursor-pointer">
-        <img src="image.jpeg" alt="Ceremony" class="zoom-img w-full h-full object-cover">
-    </div>
-    <div class="zoom-card overflow-hidden aspect-square cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=800&q=80" alt="Couple" class="zoom-img w-full h-full object-cover">
-    </div>
-    <div class="zoom-card overflow-hidden aspect-square cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Table Setting" class="zoom-img w-full h-full object-cover">
-    </div>
-</div>
-            
-            <div class="text-center mt-12">
-                <a href="https://www.instagram.com/aj_events__ramakkalmedu?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" class="inline-flex items-center text-brand-dark tracking-widest text-sm hover:text-brand-accent transition-colors">
-                    VIEW MORE ON INSTAGRAM <i class="fa-solid fa-arrow-right ml-2"></i>
+            <!-- Gallery Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded-full text-sm font-medium transition-all bg-rosegold-500 text-white shadow-md" data-filter="all">
+                    All Work
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all bg-white text-charcoal hover:bg-rosegold-100 border border-rosegold-100" data-filter="decor">
+                    Decor
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all bg-white text-charcoal hover:bg-rosegold-100 border border-rosegold-100" data-filter="venues">
+                    Venues
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all bg-white text-charcoal hover:bg-rosegold-100 border border-rosegold-100" data-filter="moments">
+                    Moments
+                </button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="galleryGrid">
+                
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-square group cursor-pointer" data-category="decor">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80" alt="Floral Decor" class="zoom-img w-full h-full object-cover">
+                </div>
+
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-square group cursor-pointer" data-category="venues">
+                    <img src="stagew.jpg" alt="Stage Setup" onerror="this.src='https://images.unsplash.com/photo-1545232979-fbf34f5ce948?auto=format&fit=crop&w=800&q=80'" class="zoom-img w-full h-full object-cover">
+                </div>
+
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-square group cursor-pointer" data-category="decor">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80" alt="Details" class="zoom-img w-full h-full object-cover">
+                </div>
+
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-square group cursor-pointer" data-category="moments">
+                    <img src="image.jpeg" alt="Ceremony Moment" onerror="this.src='https://images.unsplash.com/photo-1510076803879-66e33046d2ef?auto=format&fit=crop&w=800&q=80'" class="zoom-img w-full h-full object-cover">
+                </div>
+
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-square group cursor-pointer" data-category="moments">
+                    <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=800&q=80" alt="Couple" class="zoom-img w-full h-full object-cover">
+                </div>
+
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-square group cursor-pointer" data-category="decor">
+                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Table Setting" class="zoom-img w-full h-full object-cover">
+                </div>
+
+            </div>
+
+            <!-- Instagram Link -->
+            <div class="text-center mt-16">
+                <a href="https://www.instagram.com/aj_events__ramakkalmedu?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" class="inline-flex items-center px-8 py-3 rounded-full border-2 border-rosegold-500 text-rosegold-600 font-medium hover:bg-rosegold-500 hover:text-white transition-all">
+                    VIEW MORE ON INSTAGRAM <i class="fa-brands fa-instagram ml-3 text-lg"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-rosegold-600 font-semibold uppercase tracking-wider text-xs">Words of Love</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-4">
+                    Client Testimonials
+                </h2>
+                <div class="w-16 h-px bg-rosegold-500 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100 flex flex-col justify-between relative">
+                    <div class="text-rosegold-300 text-4xl font-serif-title mb-4">“</div>
+                    <p class="text-warmgray text-sm leading-relaxed mb-6 font-light italic">
+                        AJ Events made our dream wedding an absolute reality! From day one, their attention to detail and calm professionalism removed all our stress.
+                    </p>
+                    <div class="flex items-center space-x-4 border-t border-rosegold-100 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-charcoal text-sm">A Happy Couple</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100 flex flex-col justify-between relative">
+                    <div class="text-rosegold-300 text-4xl font-serif-title mb-4">“</div>
+                    <p class="text-warmgray text-sm leading-relaxed mb-6 font-light italic">
+                        The stage decor and lighting were beyond anything we could have imagined. Our guests are still talking about how beautiful the evening was!
+                    </p>
+                    <div class="flex items-center space-x-4 border-t border-rosegold-100 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-charcoal text-sm">Recent Clients</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100 flex flex-col justify-between relative">
+                    <div class="text-rosegold-300 text-4xl font-serif-title mb-4">“</div>
+                    <p class="text-warmgray text-sm leading-relaxed mb-6 font-light italic">
+                        Hiring AJ Events was the best decision we made. Flawless timing, top-quality catering, and complete peace of mind. Highly recommend their services in Ramakkalmettu.
+                    </p>
+                    <div class="flex items-center space-x-4 border-t border-rosegold-100 pt-4">
+                        <div>
+                            <h4 class="font-semibold text-charcoal text-sm">Grateful Family</h4>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- CONTACT SECTION -->
-    <section id="contact" class="py-24 md:py-32 bg-white">
+    <section id="contact" class="py-24 bg-champagne relative border-t border-rosegold-100/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 
-                <!-- Contact Details -->
-                <div>
-                    <h2 class="font-serif-title text-4xl text-brand-dark mb-8">Get In Touch</h2>
-                    <p class="text-brand-gray font-light mb-12">We would love to hear all about your love story and event vision. Reach out to us directly for a free consultation.</p>
+                <!-- Contact Info Column -->
+                <div class="lg:col-span-5">
+                    <span class="text-rosegold-600 font-semibold uppercase tracking-wider text-xs">Get In Touch</span>
+                    <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-6">
+                        Let’s Start Planning Your Special Day
+                    </h2>
+                    <p class="text-warmgray font-light mb-10 leading-relaxed">
+                        We would love to hear all about your love story and event vision. Fill out the form or reach out to us directly for a free consultation.
+                    </p>
 
-                    <div class="space-y-8">
-                        <div>
-                            <span class="block text-xs tracking-widest uppercase text-brand-gray mb-2">Location</span>
-                            <a href="https://maps.app.goo.gl/ienFfKbeq3akWe6W9" target="_blank" class="text-brand-dark font-light text-lg hover:text-brand-accent transition-colors">
-                                AJ Wedding Planners Ramakkalmettu, 685552
-                            </a>
-                        </div>
-                        
-                        <div>
-                            <span class="block text-xs tracking-widest uppercase text-brand-gray mb-2">Inquiries</span>
-                            <a href="mailto:ajeventsramakkalmettu@gmail.com" class="text-brand-dark font-light text-lg hover:text-brand-accent transition-colors block mb-1">
-                                ajeventsramakkalmettu@gmail.com
-                            </a>
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-rosegold-600 text-lg border border-rosegold-100">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-wider text-warmgray">Call / WhatsApp</h4>
+                                <a href="https://wa.me/919961264463" target="_blank" class="text-charcoal font-medium hover:text-rosegold-600 block">+91 99612 64463</a>
+                                <a href="tel:+918129649554" class="text-charcoal font-medium hover:text-rosegold-600 block mt-1">+91 81296 49554</a>
+                            </div>
                         </div>
 
-                      <div>
-    <span class="block text-xs tracking-widest uppercase text-brand-gray mb-3">Phone</span>
-    
-    <!-- WhatsApp Number -->
-    <a href="https://wa.me/919961264463" target="_blank" class="flex items-center text-brand-dark font-light text-lg hover:text-brand-accent transition-colors mb-3">
-        <i class="fa-brands fa-whatsapp text-green-500 text-xl w-8"></i>
-        +91 99612 64463
-    </a>
-    
-    <!-- Calling Number -->
-    <a href="tel:+918129649554" class="flex items-center text-brand-dark font-light text-lg hover:text-brand-accent transition-colors">
-        <i class="fa-solid fa-phone text-brand-gray text-lg w-8"></i>
-        +91 81296 49554
-    </a>
-</div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-rosegold-600 text-lg border border-rosegold-100">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-wider text-warmgray">Email</h4>
+                                <a href="mailto:ajeventsramakkalmettu@gmail.com" class="text-charcoal font-medium hover:text-rosegold-600">ajeventsramakkalmettu@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-rosegold-600 text-lg border border-rosegold-100">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-wider text-warmgray">Location</h4>
+                                <a href="https://maps.app.goo.gl/ienFfKbeq3akWe6W9" target="_blank" class="text-charcoal font-medium hover:text-rosegold-600">
+                                    AJ Wedding Planners<br>Ramakkalmettu, 685552
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Contact Form to Email (Uses FormSubmit) -->
-<div class="bg-brand-cream p-8 md:p-12 border border-gray-100">
-    <h3 class="font-serif-title text-2xl text-brand-dark mb-8">Send an Inquiry</h3>
-    
-    <!-- FormSubmit Action URL using your email -->
-    <form action="https://formsubmit.co/ajeventsramakkalmettu@gmail.com" method="POST" class="space-y-6">
-        
-        <!-- FormSubmit Advanced Configuration -->
-        <input type="hidden" name="_subject" value="New Inquiry from AJ Events Website!">
-        <input type="hidden" name="_captcha" value="false"> <!-- Disables the annoying captcha -->
-        
-        <div>
-            <input type="text" name="name" required placeholder="Your Name" class="w-full bg-transparent border-b border-gray-300 py-3 text-brand-dark focus:outline-none focus:border-brand-dark transition-colors placeholder-gray-400 font-light">
-        </div>
-        <div>
-            <input type="email" name="email" required placeholder="Email Address" class="w-full bg-transparent border-b border-gray-300 py-3 text-brand-dark focus:outline-none focus:border-brand-dark transition-colors placeholder-gray-400 font-light">
-        </div>
-        <div>
-            <input type="tel" name="phone" required placeholder="Phone Number" class="w-full bg-transparent border-b border-gray-300 py-3 text-brand-dark focus:outline-none focus:border-brand-dark transition-colors placeholder-gray-400 font-light">
-        </div>
-        <div>
-            <textarea name="message" rows="4" required placeholder="Tell us about your event..." class="w-full bg-transparent border-b border-gray-300 py-3 text-brand-dark focus:outline-none focus:border-brand-dark transition-colors placeholder-gray-400 font-light resize-none"></textarea>
-        </div>
-        <button type="submit" class="w-full py-4 bg-brand-dark text-white text-sm tracking-widest hover:bg-black transition-all">
-            SUBMIT INQUIRY
-        </button>
-    </form>
-</div>
+                <!-- Contact Form Column -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white p-8 sm:p-10 rounded-2xl shadow-lg border border-rosegold-100">
+                        <h3 class="font-serif-title text-2xl text-charcoal mb-6">Send an Inquiry</h3>
+                        
+                        <!-- Success Feedback Message Box -->
+                        <div id="formSuccessMessage" class="hidden mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-xl text-emerald-600"></i>
+                            <div>
+                                <strong class="font-semibold">Thank you for reaching out!</strong>
+                                <p class="text-xs mt-0.5">We have received your request and will contact you shortly.</p>
+                            </div>
+                        </div>
+
+                        <!-- REPLACE action="YOUR_FORMSPREE_ENDPOINT_URL" with your real endpoint -->
+                        <form id="weddingInquiryForm" action="YOUR_FORMSPREE_ENDPOINT_URL" method="POST" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="name">Your Name *</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30" placeholder="e.g. Jane Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30" placeholder="jane@example.com">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30" placeholder="+91 XXXXX XXXXX">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="serviceInterested">Service Interested In</label>
+                                    <select id="serviceInterested" name="service" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30">
+                                        <option value="Wedding Planning">Wedding Planning & Contracts</option>
+                                        <option value="Decor & Stage">Decor & Stage Setup</option>
+                                        <option value="Catering">Catering Services</option>
+                                        <option value="Photography & Video">Photography & Video</option>
+                                        <option value="Other Celebrations">Other Celebrations (Birthdays, etc.)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="message">Tell Us About Your Event *</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30 resize-none" placeholder="Share your specific requirements, venue ideas, dates..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-xl bg-rosegold-500 text-white font-medium tracking-widest hover:bg-rosegold-600 transition-all shadow-md hover:shadow-lg">
+                                SUBMIT INQUIRY
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-brand-dark text-white py-16">
+    <footer class="bg-charcoal text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
             
-            <img src="aj logo.png" alt="AJ Events Logo" class="h-16 w-auto object-contain mb-8 brightness-0 invert opacity-90">
+            <img src="aj logo.png" alt="AJ Events Logo" class="h-16 w-auto object-contain mb-6 brightness-0 invert opacity-90">
+            <span class="font-serif-title text-2xl font-bold tracking-wider text-white mb-8">
+                AJ <span class="font-light italic text-rosegold-300">Events</span>
+            </span>
             
-            <div class="flex space-x-8 mb-10">
-                <a href="https://www.instagram.com/aj_events__ramakkalmedu?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" class="text-white hover:text-brand-gray transition-colors text-xl">
+            <!-- Social Icons -->
+            <div class="flex space-x-6 mb-10">
+                <a href="https://www.instagram.com/aj_events__ramakkalmedu?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-rosegold-500 hover:text-white transition-colors text-xl">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
-                <a href="https://wa.me/919961264463" target="_blank" class="text-white hover:text-brand-gray transition-colors text-xl">
+                <a href="https://wa.me/919961264463" target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-rosegold-500 hover:text-white transition-colors text-xl">
                     <i class="fa-brands fa-whatsapp"></i>
                 </a>
-                <a href="mailto:ajeventsramakkalmettu@gmail.com" class="text-white hover:text-brand-gray transition-colors text-xl">
+                <a href="mailto:ajeventsramakkalmettu@gmail.com" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-rosegold-500 hover:text-white transition-colors text-xl">
                     <i class="fa-regular fa-envelope"></i>
                 </a>
             </div>
-            
-            <p class="text-xs text-brand-gray tracking-widest uppercase">
-                &copy; <span id="currentYear"></span> AJ EVENTS. ALL RIGHTS RESERVED.
-            </p>
+
+            <div class="w-full border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 space-y-4 sm:space-y-0 tracking-widest uppercase">
+                <p>&copy; <span id="currentYear"></span> AJ EVENTS. ALL RIGHTS RESERVED.</p>
+                <div class="flex space-x-6">
+                    <a href="https://maps.app.goo.gl/ienFfKbeq3akWe6W9" target="_blank" class="hover:text-white transition-colors">Ramakkalmettu, 685552</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <!-- JAVASCRIPT FOR INTERACTIVITY -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Remove Loader after page load
+            // Remove Loader after page load smoothly
             window.addEventListener('load', () => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
@@ -403,15 +630,58 @@
                 });
             });
 
-            // Add background shadow to header on scroll
-            window.addEventListener('scroll', () => {
-                const header = document.getElementById('mainHeader');
-                if (window.scrollY > 10) {
-                    header.classList.add('shadow-sm');
-                } else {
-                    header.classList.remove('shadow-sm');
-                }
+            // Portfolio Gallery Filter Logic
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active state from all buttons
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-rosegold-500', 'text-white', 'shadow-md');
+                        b.classList.add('bg-white', 'text-charcoal');
+                    });
+
+                    // Add active state to clicked button
+                    btn.classList.add('bg-rosegold-500', 'text-white', 'shadow-md');
+                    btn.classList.remove('bg-white', 'text-charcoal');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
             });
+
+            // Form Submit Logic with smooth UI response (Assuming Formspree or similar)
+            // If using standard Formspree, you might not want e.preventDefault() unless doing an AJAX submission.
+            // But to keep the UI feedback from Code 1 intact for demonstration:
+            const inquiryForm = document.getElementById('weddingInquiryForm');
+            const formSuccessMessage = document.getElementById('formSuccessMessage');
+
+            // NOTE: If you use Formspree, you can remove this script and let Formspree handle the redirect, 
+            // OR use fetch() to submit via AJAX. Keeping UI effect below:
+            /*
+            inquiryForm.addEventListener('submit', (e) => {
+                // e.preventDefault(); 
+                
+                // Show success feedback (In actual implementation, do this in a .then() after fetch)
+                formSuccessMessage.classList.remove('hidden');
+                
+                // Scroll smoothly to success message
+                formSuccessMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Hide success message after 6 seconds
+                setTimeout(() => {
+                    formSuccessMessage.classList.add('hidden');
+                }, 6000);
+            });
+            */
         });
     </script>
 </body>
