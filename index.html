@@ -1,0 +1,751 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJ Wedding Planner | Crafting Your Unforgettable Moments</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        champagne: '#FDFBF7',
+                        rosegold: {
+                            100: '#F7E7E3',
+                            300: '#E8C5BE',
+                            500: '#C88A80',
+                            600: '#B5756B',
+                            700: '#94584E'
+                        },
+                        gold: {
+                            400: '#D4AF37',
+                            500: '#C5A028'
+                        },
+                        charcoal: '#2C2A29',
+                        warmgray: '#8C8583'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7;
+            color: #2C2A29;
+            overflow-x: hidden;
+        }
+        
+        .font-serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Glassmorphism Navigation */
+        .glass-nav {
+            background: rgba(253, 251, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Smooth image zoom effect */
+        .zoom-img {
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .zoom-card:hover .zoom-img {
+            transform: scale(1.06);
+        }
+
+        /* Soft gradient overlay */
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(44, 42, 41, 0.45) 0%, rgba(44, 42, 41, 0.7) 100%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E8C5BE;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C88A80;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-rosegold-300 selection:text-charcoal">
+
+    <!-- NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav border-b border-rosegold-100/50 transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center space-x-2 group">
+                <span class="font-serif-title text-2xl md:text-3xl font-bold tracking-wider text-charcoal group-hover:text-rosegold-600 transition-colors">
+                    AJ <span class="font-light italic text-rosegold-500">Weddings</span>
+                </span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-sm font-medium text-charcoal hover:text-rosegold-600 transition-colors">Home</a>
+                <a href="#about" class="text-sm font-medium text-charcoal hover:text-rosegold-600 transition-colors">About Us</a>
+                <a href="#services" class="text-sm font-medium text-charcoal hover:text-rosegold-600 transition-colors">Services</a>
+                <a href="#portfolio" class="text-sm font-medium text-charcoal hover:text-rosegold-600 transition-colors">Portfolio</a>
+                <a href="#testimonials" class="text-sm font-medium text-charcoal hover:text-rosegold-600 transition-colors">Testimonials</a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full border border-rosegold-500 text-rosegold-600 text-sm font-medium hover:bg-rosegold-500 hover:text-white transition-all shadow-sm">
+                    Book Consultation
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="menuToggle" class="md:hidden text-charcoal focus:outline-none p-2" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-champagne border-b border-rosegold-100 px-6 py-6 transition-all duration-300">
+            <nav class="flex flex-col space-y-4">
+                <a href="#home" class="mobile-nav-link text-base font-medium text-charcoal hover:text-rosegold-600">Home</a>
+                <a href="#about" class="mobile-nav-link text-base font-medium text-charcoal hover:text-rosegold-600">About Us</a>
+                <a href="#services" class="mobile-nav-link text-base font-medium text-charcoal hover:text-rosegold-600">Services</a>
+                <a href="#portfolio" class="mobile-nav-link text-base font-medium text-charcoal hover:text-rosegold-600">Portfolio</a>
+                <a href="#testimonials" class="mobile-nav-link text-base font-medium text-charcoal hover:text-rosegold-600">Testimonials</a>
+                <a href="#contact" class="mobile-nav-link inline-block text-center px-5 py-3 rounded-full bg-rosegold-500 text-white font-medium hover:bg-rosegold-600 transition-colors mt-2">
+                    Book Consultation
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Banner Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80" 
+                 alt="Luxury Wedding Setup" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-20">
+            <p class="text-rosegold-300 font-medium tracking-widest uppercase text-xs md:text-sm mb-4">
+                Bespoke Luxury Wedding Planning
+            </p>
+            <h1 class="font-serif-title text-4xl sm:text-6xl md:text-7xl font-normal leading-tight mb-6">
+                Crafting Your <span class="italic font-light text-rosegold-100">Unforgettable</span> Moments
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-light mb-10 leading-relaxed">
+                From intimate gatherings to grand celebrations, AJ Wedding Planner brings your dream wedding to life with flawless elegance and timeless style.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full bg-rosegold-500 text-white font-medium hover:bg-rosegold-600 transition-all transform hover:-translate-y-0.5 shadow-lg">
+                    Book a Free Consultation
+                </a>
+                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-full border border-white/60 text-white font-medium hover:bg-white/10 transition-all backdrop-blur-sm">
+                    Explore Our Gallery
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 text-white/70 hover:text-white transition-colors animate-bounce hidden sm:block">
+            <i class="fa-solid fa-chevron-down text-lg"></i>
+        </a>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-champagne">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Grid -->
+                <div class="relative">
+                    <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative z-10">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" 
+                             alt="Wedding Planner at work" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <!-- Secondary Accent Image -->
+                    <div class="hidden sm:block absolute -bottom-8 -right-8 w-2/3 aspect-square rounded-2xl overflow-hidden shadow-2xl border-8 border-champagne z-20">
+                        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80" 
+                             alt="Wedding Detail" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 border-2 border-rosegold-300 rounded-2xl -z-0"></div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="lg:pl-8">
+                    <span class="text-rosegold-600 font-semibold uppercase tracking-wider text-xs">The AJ Experience</span>
+                    <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-6">
+                        We don't just plan weddings; we curates memories.
+                    </h2>
+                    <p class="text-warmgray leading-relaxed mb-6 font-light">
+                        At <strong class="font-medium text-charcoal">AJ Wedding Planner</strong>, we believe every love story deserves an extraordinary celebration. Based on luxury design principles and immaculate organization, our team takes away the stress so you can truly enjoy every step of your journey to the altar.
+                    </p>
+                    <p class="text-warmgray leading-relaxed mb-8 font-light">
+                        Whether you dream of a romantic beachside ceremony, a timeless ballroom reception, or a unique destination extravaganza, we tailor every detail to reflect your personality and love story.
+                    </p>
+
+                    <!-- Feature Bullet Points -->
+                    <div class="grid grid-cols-2 gap-6 mb-10">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-rosegold-100 flex items-center justify-center text-rosegold-600 shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-charcoal text-sm">Tailored Design</h4>
+                                <p class="text-xs text-warmgray mt-0.5">100% personalized themes</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-rosegold-100 flex items-center justify-center text-rosegold-600 shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-charcoal text-sm">Seamless Execution</h4>
+                                <p class="text-xs text-warmgray mt-0.5">Stress-free coordination</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#services" class="inline-flex items-center text-rosegold-600 font-medium hover:text-rosegold-700 group transition-colors">
+                        Discover Our Services 
+                        <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-rosegold-600 font-semibold uppercase tracking-wider text-xs">What We Offer</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-4">
+                    Our Curated Wedding Services
+                </h2>
+                <p class="text-warmgray font-light">
+                    From initial concept to the final dance, we offer comprehensive packages tailored to your specific planning requirements.
+                </p>
+            </div>
+
+            <!-- Services Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Service 1 -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-3">Full Wedding Planning</h3>
+                        <p class="text-warmgray text-sm leading-relaxed mb-6 font-light">
+                            End-to-end management covering venue selection, budgeting, vendor curation, timeline management, and full day-of coordination.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold uppercase tracking-wider text-rosegold-600 group-hover:text-rosegold-700 flex items-center">
+                        Inquire Now <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-3">Partial Coordination</h3>
+                        <p class="text-warmgray text-sm leading-relaxed mb-6 font-light">
+                            Designed for couples who have started planning but need professional support to wrap up logistics and run the event smoothly.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold uppercase tracking-wider text-rosegold-600 group-hover:text-rosegold-700 flex items-center">
+                        Inquire Now <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-plane-departure"></i>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-3">Destination Weddings</h3>
+                        <p class="text-warmgray text-sm leading-relaxed mb-6 font-light">
+                            Complete travel, hospitality, and event planning for exotic locations worldwide to ensure your guests have an unforgettable stay.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold uppercase tracking-wider text-rosegold-600 group-hover:text-rosegold-700 flex items-center">
+                        Inquire Now <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-3">Theme & Decor Styling</h3>
+                        <p class="text-warmgray text-sm leading-relaxed mb-6 font-light">
+                            Bespoke visual design, floral artistry, lighting concepts, and mood boards that capture your aesthetic vision perfectly.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold uppercase tracking-wider text-rosegold-600 group-hover:text-rosegold-700 flex items-center">
+                        Inquire Now <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-3">Photography & Media</h3>
+                        <p class="text-warmgray text-sm leading-relaxed mb-6 font-light">
+                            Access to elite wedding photographers, videographers, and drone operators to document every candid moment in cinematic detail.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold uppercase tracking-wider text-rosegold-600 group-hover:text-rosegold-700 flex items-center">
+                        Inquire Now <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100/60 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosegold-100 text-rosegold-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-rosegold-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-normal text-charcoal mb-3">Entertainment & Hospitality</h3>
+                        <p class="text-warmgray text-sm leading-relaxed mb-6 font-light">
+                            Top-tier DJs, live bands, celebrity artists, mixologists, and guest management to keep the celebration energetic and memorable.
+                        </p>
+                    </div>
+                    <a href="#contact" class="text-xs font-semibold uppercase tracking-wider text-rosegold-600 group-hover:text-rosegold-700 flex items-center">
+                        Inquire Now <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO / GALLERY SECTION -->
+    <section id="portfolio" class="py-24 bg-champagne">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-rosegold-600 font-semibold uppercase tracking-wider text-xs">Our Work</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-4">
+                    The Portfolio
+                </h2>
+                <p class="text-warmgray font-light">
+                    Take a look at some of the magical moments we've had the honor of bringing to life.
+                </p>
+            </div>
+
+            <!-- Gallery Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded-full text-sm font-medium transition-all bg-rosegold-500 text-white shadow-md" data-filter="all">
+                    All Work
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all bg-white text-charcoal hover:bg-rosegold-100 border border-rosegold-100" data-filter="decor">
+                    Decor & Floral
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all bg-white text-charcoal hover:bg-rosegold-100 border border-rosegold-100" data-filter="venues">
+                    Grand Venues
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all bg-white text-charcoal hover:bg-rosegold-100 border border-rosegold-100" data-filter="destination">
+                    Destination
+                </button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+                
+                <!-- Photo Item 1 -->
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group cursor-pointer" data-category="decor">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80" alt="Floral Decor" class="zoom-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-xs uppercase tracking-widest text-rosegold-300">Decor & Styling</span>
+                        <h4 class="font-serif-title text-xl font-normal mt-1">Royal Floral Arch</h4>
+                    </div>
+                </div>
+
+                <!-- Photo Item 2 -->
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group cursor-pointer" data-category="venues">
+                    <img src="https://images.unsplash.com/photo-1545232979-fbf34f5ce948?auto=format&fit=crop&w=800&q=80" alt="Ballroom Venue" class="zoom-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-xs uppercase tracking-widest text-rosegold-300">Grand Venues</span>
+                        <h4 class="font-serif-title text-xl font-normal mt-1">Starlight Ballroom</h4>
+                    </div>
+                </div>
+
+                <!-- Photo Item 3 -->
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group cursor-pointer" data-category="destination">
+                    <img src="https://images.unsplash.com/photo-1510076803879-66e33046d2ef?auto=format&fit=crop&w=800&q=80" alt="Beach Destination Wedding" class="zoom-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-xs uppercase tracking-widest text-rosegold-300">Destination</span>
+                        <h4 class="font-serif-title text-xl font-normal mt-1">Sunset Beach Vows</h4>
+                    </div>
+                </div>
+
+                <!-- Photo Item 4 -->
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group cursor-pointer" data-category="decor">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80" alt="Table Setting" class="zoom-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-xs uppercase tracking-widest text-rosegold-300">Decor & Styling</span>
+                        <h4 class="font-serif-title text-xl font-normal mt-1">Elegant Banquet Setup</h4>
+                    </div>
+                </div>
+
+                <!-- Photo Item 5 -->
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group cursor-pointer" data-category="destination">
+                    <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=800&q=80" alt="Cliffside Ceremony" class="zoom-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-xs uppercase tracking-widest text-rosegold-300">Destination</span>
+                        <h4 class="font-serif-title text-xl font-normal mt-1">Cliffside Villa Ceremony</h4>
+                    </div>
+                </div>
+
+                <!-- Photo Item 6 -->
+                <div class="gallery-item zoom-card relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group cursor-pointer" data-category="venues">
+                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Castle Venue" class="zoom-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+                        <span class="text-xs uppercase tracking-widest text-rosegold-300">Grand Venues</span>
+                        <h4 class="font-serif-title text-xl font-normal mt-1">Heritage Castle Wedding</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-rosegold-600 font-semibold uppercase tracking-wider text-xs">Words of Love</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-4">
+                    Client Testimonials
+                </h2>
+                <p class="text-warmgray font-light">
+                    Read what our beautiful couples have to say about their experience working with AJ Wedding Planner.
+                </p>
+            </div>
+
+            <!-- Testimonials Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Testimonial 1 -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100 flex flex-col justify-between relative">
+                    <div class="text-rosegold-300 text-4xl font-serif-title mb-4">“</div>
+                    <p class="text-warmgray text-sm leading-relaxed mb-6 font-light italic">
+                        AJ Wedding Planner made our dream wedding an absolute reality! From day one, their attention to detail and calm professionalism removed all our stress.
+                    </p>
+                    <div class="flex items-center space-x-4 border-t border-rosegold-100 pt-4">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Sophia & Liam" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-semibold text-charcoal text-sm">Sophia & Liam</h4>
+                            <span class="text-xs text-rosegold-600">Married in Bali, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100 flex flex-col justify-between relative">
+                    <div class="text-rosegold-300 text-4xl font-serif-title mb-4">“</div>
+                    <p class="text-warmgray text-sm leading-relaxed mb-6 font-light italic">
+                        The decor and styling were beyond anything we could have imagined. Our guests are still talking about how beautiful the evening was!
+                    </p>
+                    <div class="flex items-center space-x-4 border-t border-rosegold-100 pt-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Marcus & Elena" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-semibold text-charcoal text-sm">Marcus & Elena</h4>
+                            <span class="text-xs text-rosegold-600">Married in Florence, Italy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-champagne p-8 rounded-2xl border border-rosegold-100 flex flex-col justify-between relative">
+                    <div class="text-rosegold-300 text-4xl font-serif-title mb-4">“</div>
+                    <p class="text-warmgray text-sm leading-relaxed mb-6 font-light italic">
+                        Hiring AJ Wedding Planner was the best decision we made. Flawless timing, top-quality vendors, and complete peace of mind.
+                    </p>
+                    <div class="flex items-center space-x-4 border-t border-rosegold-100 pt-4">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" alt="Chloe & Daniel" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-semibold text-charcoal text-sm">Chloe & Daniel</h4>
+                            <span class="text-xs text-rosegold-600">Married in New York, USA</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-24 bg-champagne relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Contact Info Column -->
+                <div class="lg:col-span-5">
+                    <span class="text-rosegold-600 font-semibold uppercase tracking-wider text-xs">Get In Touch</span>
+                    <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal mt-2 mb-6">
+                        Let’s Start Planning Your Special Day
+                    </h2>
+                    <p class="text-warmgray font-light mb-8 leading-relaxed">
+                        We would love to hear all about your love story and wedding vision. Fill out the form or reach out to us directly for a free consultation.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-rosegold-600 text-lg border border-rosegold-100">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-wider text-warmgray">Phone</h4>
+                                <a href="tel:+1234567890" class="text-charcoal font-medium hover:text-rosegold-600">+1 (800) 555-AJWEDDING</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-rosegold-600 text-lg border border-rosegold-100">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-wider text-warmgray">Email</h4>
+                                <a href="mailto:info@ajweddingplanner.com" class="text-charcoal font-medium hover:text-rosegold-600">contact@ajweddingplanner.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-rosegold-600 text-lg border border-rosegold-100">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-wider text-warmgray">Studio Office</h4>
+                                <p class="text-charcoal font-medium">123 Luxury Lane, Suite 400, Beverly Hills, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Column -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white p-8 sm:p-10 rounded-2xl shadow-lg border border-rosegold-100">
+                        <h3 class="font-serif-title text-2xl text-charcoal mb-6">Book Your Free Consultation</h3>
+                        
+                        <!-- Success Feedback Message Box -->
+                        <div id="formSuccessMessage" class="hidden mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-xl text-emerald-600"></i>
+                            <div>
+                                <strong class="font-semibold">Thank you for reaching out!</strong>
+                                <p class="text-xs mt-0.5">We have received your request and will contact you within 24 hours.</p>
+                            </div>
+                        </div>
+
+                        <form id="weddingInquiryForm" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="fullName">Your Name *</label>
+                                    <input type="text" id="fullName" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30" placeholder="e.g. Jane Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="email">Email Address *</label>
+                                    <input type="email" id="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30" placeholder="jane@example.com">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="eventDate">Target Event Date</label>
+                                    <input type="date" id="eventDate" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="guestCount">Estimated Guests</label>
+                                    <select id="guestCount" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30">
+                                        <option value="">Select option</option>
+                                        <option value="under50">Intimate (Under 50)</option>
+                                        <option value="50-150">50 - 150 Guests</option>
+                                        <option value="150-300">150 - 300 Guests</option>
+                                        <option value="300+">300+ Grand Event</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="serviceInterested">Service Interested In</label>
+                                <select id="serviceInterested" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30">
+                                    <option value="Full Planning">Full Wedding Planning</option>
+                                    <option value="Partial Coordination">Partial Coordination</option>
+                                    <option value="Destination Wedding">Destination Wedding</option>
+                                    <option value="Theme & Styling">Theme & Decor Styling</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-2" for="message">Tell Us About Your Vision *</label>
+                                <textarea id="message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-rosegold-500 focus:ring-1 focus:ring-rosegold-500 outline-none text-sm transition-all bg-champagne/30" placeholder="Share any specific details, venues, or ideas..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-xl bg-rosegold-500 text-white font-medium hover:bg-rosegold-600 transition-all shadow-md hover:shadow-lg">
+                                Send Inquiry
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-charcoal text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-800 pb-12 mb-12">
+                <!-- Footer Brand -->
+                <div class="mb-6 md:mb-0 text-center md:text-left">
+                    <span class="font-serif-title text-2xl font-bold tracking-wider text-white">
+                        AJ <span class="font-light italic text-rosegold-300">Weddings</span>
+                    </span>
+                    <p class="text-xs text-gray-400 mt-2">Bespoke Wedding Design & Event Management</p>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex space-x-6">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-rosegold-500 hover:text-white transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-rosegold-500 hover:text-white transition-colors">
+                        <i class="fa-brands fa-pinterest-p"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-rosegold-500 hover:text-white transition-colors">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 space-y-4 sm:space-y-0">
+                <p>&copy; <span id="currentYear"></span> AJ Wedding Planner. All Rights Reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FOR INTERACTIVITY -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Mobile Navigation Toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                } else {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-xmark');
+                }
+            });
+
+            // Close mobile menu when clicking any link
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // Portfolio Gallery Filter Logic
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active state from all buttons
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-rosegold-500', 'text-white', 'shadow-md');
+                        b.classList.add('bg-white', 'text-charcoal');
+                    });
+
+                    // Add active state to clicked button
+                    btn.classList.add('bg-rosegold-500', 'text-white', 'shadow-md');
+                    btn.classList.remove('bg-white', 'text-charcoal');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Form Submit Logic with smooth UI response
+            const inquiryForm = document.getElementById('weddingInquiryForm');
+            const formSuccessMessage = document.getElementById('formSuccessMessage');
+
+            inquiryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Show success feedback
+                formSuccessMessage.classList.remove('hidden');
+                inquiryForm.reset();
+
+                // Scroll smoothly to success message
+                formSuccessMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Hide success message after 6 seconds
+                setTimeout(() => {
+                    formSuccessMessage.classList.add('hidden');
+                }, 6000);
+            });
+        });
+    </script>
+</body>
+</html>
+```
